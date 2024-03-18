@@ -1,0 +1,21 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+.main{
+    display: flex;
+}
+
+.sidebar ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sidebar ul li{
+    margin: 10px;
+    padding-bottom: 10px;
+}
+.searchbar{
+    margin-left: 10px;
+}
+
