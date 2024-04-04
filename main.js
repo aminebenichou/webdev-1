@@ -21,11 +21,11 @@ async function getVideos() {
             const videoId = result.videos[index].video_id;
             const nov = result.videos[index].number_of_views;
             const thumbnail = result.videos[index].thumbnails[0].url;
-            
+
             console.log(videoId);
 
             // creating elements
-            var vid_id =  document.createElement('span');
+            var vid_id = document.createElement('span');
             vid_id.style.display = 'none'
             vid_id.innerHTML = videoId
             var video = document.createElement('div');
@@ -38,21 +38,49 @@ async function getVideos() {
 
 
             // appending elements
-            
+
             vid_title.innerHTML = title;
             vid_thumbnail.src = thumbnail;
             vid_nov.innerHTML = nov;
             // vid_link.href = './video.html'
-            
-            
+
+
             video.appendChild(vid_thumbnail);
             video.appendChild(vid_title);
             video.appendChild(vid_nov);
             vid_link.appendChild(vid_id);
             vid_link.appendChild(video);
             videos.appendChild(vid_link);
+
+
         }
-        console.log(result.videos[1]);
+        const video_cards = document.querySelectorAll('.video')
+
+        video_cards.forEach(element => {
+            element.addEventListener('click', (e) => {
+                const vidId = element.children[0].innerHTML
+                document.cookie = `videoId=${vidId}`;
+                alert("Welcome again " + vidId);
+                window.location.href = `./video.html`
+            })
+        });
+
+
+        // event listener using foreach for multiple items
+        const li_home = document.querySelectorAll('.trigger')
+
+        li_home.forEach(element => {
+            element.addEventListener('click', (e) => {
+                element.classList.toggle('active')
+            })
+        })
+        // event listner for one item
+        const search = document.getElementById("search")
+        const main = document.getElementsByClassName( 'center')[0]
+        search.addEventListener("click", function (e){
+            main.classList.toggle("active")
+        })
+            console.log(result.videos[1]);
     } catch (error) {
         console.error(error);
     }
@@ -65,11 +93,5 @@ async function getVideos() {
 getVideos()
 
 
-
-video_cards = document.getElementsByClassName('video')
-
-video_cards.addEventListener('click', (e)=>{
-        console.log(e);
-    })
 
 

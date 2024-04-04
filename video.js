@@ -1,4 +1,12 @@
-const url = 'https://youtube-v31.p.rapidapi.com/videos?part=contentDetails%2Csnippet%2Cstatistics&id=7ghhRHRP6t4';
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`); // regex
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+const video_id = getCookie('videoId')
+
+
+const url = `https://youtube-v31.p.rapidapi.com/videos?part=contentDetails%2Csnippet%2Cstatistics&id=${video_id}`;
 const options = {
     method: 'GET',
     headers: {
@@ -28,7 +36,7 @@ async function getVideoDetails() {
 getVideoDetails()
 
 
-const sugg_url = 'https://youtube-v31.p.rapidapi.com/search?relatedToVideoId=7ghhRHRP6t4&part=id%2Csnippet&type=video&maxResults=50';
+const sugg_url = `https://youtube-v31.p.rapidapi.com/search?relatedToVideoId=${video_id}&part=id%2Csnippet&type=video&maxResults=50`;
 
 async function getSuggestVideos() {
     const suggestions = document.getElementsByClassName("suggestions")[0]
