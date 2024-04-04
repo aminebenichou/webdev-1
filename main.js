@@ -18,19 +18,39 @@ async function getVideos() {
         const result = await response.json();
         for (let index = 0; index < result.videos.length; index++) {
             const title = result.videos[index].title;
-            const author = result.videos[index].author;
+            const videoId = result.videos[index].video_id;
+            const nov = result.videos[index].number_of_views;
+            const thumbnail = result.videos[index].thumbnails[0].url;
+            
+            console.log(videoId);
+
             // creating elements
+            var vid_id =  document.createElement('span');
+            vid_id.style.display = 'none'
+            vid_id.innerHTML = videoId
             var video = document.createElement('div');
             video.className = "video-card"
             var vid_title = document.createElement('h3');
+            var vid_link = document.createElement('a');
+            vid_link.className = 'video'
+            var vid_thumbnail = document.createElement('img');
+            var vid_nov = document.createElement('p');
+
 
             // appending elements
             
             vid_title.innerHTML = title;
-            video.appendChild(vid_title);
+            vid_thumbnail.src = thumbnail;
+            vid_nov.innerHTML = nov;
+            // vid_link.href = './video.html'
             
-            videos.appendChild(video);
-
+            
+            video.appendChild(vid_thumbnail);
+            video.appendChild(vid_title);
+            video.appendChild(vid_nov);
+            vid_link.appendChild(vid_id);
+            vid_link.appendChild(video);
+            videos.appendChild(vid_link);
         }
         console.log(result.videos[1]);
     } catch (error) {
@@ -40,4 +60,16 @@ async function getVideos() {
 
 
 
+
+
 getVideos()
+
+
+
+video_cards = document.getElementsByClassName('video')
+
+video_cards.addEventListener('click', (e)=>{
+        console.log(e);
+    })
+
+
